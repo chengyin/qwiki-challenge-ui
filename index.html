@@ -3,6 +3,8 @@
     <meta charset="utf-8">
     <title>QWiki Challenge</title>
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.5.2/jquery.min.js"></script>
+    <script type="text/javascript" src="http://use.typekit.com/uvk5xzl.js"></script>
+    <script type="text/javascript">try{Typekit.load();}catch(e){}</script>
     <style type="text/css" media="screen">
       /* --------------------------------------------------------------
 
@@ -71,54 +73,111 @@
       :focus { outline: 0; }
     
     
-    
       /* Mine */
-      #grid {
-        position: absolute;      
-        top: 0;
+      /*#grid {
+              position: absolute;      
+              top: 0;
+            }
+            
+            #grid table, #grid tr, #grid td {
+              border: 1px solid silver;
+              margin: 0;
+              padding: 0;
+            }
+          
+            #grid tr, #grid td {
+              border: 1px solid silver;
+            }
+          */
+          
+      body {
+        background: #eee;
+        font: 14px/1.2 "Lucida Grande", sans-serif;
+        padding-top: 3em;
+      }    
+      
+      h1 {
+        color: #FF8000;
+        text-shadow: 0 1px 0 gray;
+        font: 4em "bello-pro-1","bello-pro-2";
+        text-align: center;
       }
       
-      #grid table, #grid tr, #grid td {
-        border: 1px solid silver;
-        margin: 0;
-        padding: 0;
+      p {
+        margin: 1em 0;
+        text-align: center;
       }
-    
-      #grid tr, #grid td {
-        border: 1px solid silver;
+      
+      #container {
+        margin: 3em 0;
       }
-    
+      
       #canvas {
-        background: transparent;
-        border: 1px solid black;
+        background: #ccc;
+        border: 10px solid white;
+        border-radius: 5px;
+        box-shadow: 0 1px 4px silver;
         height: 768px;
         width: 1024px;
+        position: relative;
+        top: 0;
+        right: 0;
+        left: 0;
+        bottom: 0;
+        margin: auto;
       }
+      
+      #canvas a {
+        color: white;
+        font: 1.5em "museo-sans-1", "museo-sans-2" ;
+        font-weight: 100;
+        text-shadow: 0 -1px 0 #333;
+        text-decoration: none;
+      }
+      
+      #setting{
+        text-align: center;
+      }
+      
+      #setting label {
+        display: inline-block;
+        width: 100px;
+        text-align: left;
+      }
+      
+      #result-text {
+        width: 1024px;
+        margin: auto;
+        text-align: center;
+      }
+      
     </style>
   </head>
   <body>
+    <h1>Qwiki Challenge Pattern Generator</h1>
     <div id="container">
-      <div id="grid">
-      
-      </div>
+      <!-- <div id="grid">
+            
+            </div> -->
       <div id="canvas">
       
       </div>
     </div>
-    <div id="setting">
-      <form>
-        <label for="columns">Columns</label><input type="text" id="columns" name="columns" value="10">
-        <label for="rows">Rows</label><input type="text" id="rows" name="rows" value="10">
-        <label for="photo_no"># of Photos</label><input type="text" id="photo_no" name="photo_no" value="4">
-        <label for="comment_value">Value of a comment</label><input type="text" id="comment_value" name="comment_value" value="1">
-        <label for="favorite_value">Value of a favorite</label><input type="text" id="favorite_value" name="favorite_value" value="10">        
+    <div>
+      <form id="setting">
+        <p><label for="columns">Columns</label><input type="text" id="columns" name="columns" value="6"></p>
+        <p><label for="rows">Rows</label><input type="text" id="rows" name="rows" value="5"></p>
+        <p><label for="photo_no"># of Patterns</label><input type="text" id="photo_no" name="photo_no" value="23"></p>
+        <!-- <label for="comment_value">Value of a comment</label><input type="text" id="comment_value" name="comment_value" value="1">
+        <label for="favorite_value">Value of a favorite</label><input type="text" id="favorite_value" name="favorite_value" value="10">  -->       
         <input type="button" value="generate" id="gen">
       </form>
+      <p>Patterns are randomly fetched from <a href="http://colourlovers.com">ColourLovers</a> and sorted by their popularity.</p>
     </div>
     <div id="loading_photo" style="display: none">
       Loading photos from flickr.
     </div>
-    <div id="result-text">
+    <div id="result-text" style="display: none">
       
     </div>
   </body>

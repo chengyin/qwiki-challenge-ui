@@ -296,14 +296,15 @@
     for (p = 0; p < photos.length; p++) {
       if (photos[p].hasOwnProperty('left')) {
         $("<p></p>").text("Picture " + p + " placed at " + [photos[p].top, photos[p].right, photos[p].bottom, photos[p].left]).appendTo("#result-text");
-        $("<div></div>").css({
+        $("<a></a>").css({
           'position': 'absolute',
+          'display': 'block',
           'top': min_h * (photos[p].top),
           'left': min_w * (photos[p].left),
           'width': min_w * (photos[p].right - photos[p].left + 1),
           'height': min_h * (photos[p].bottom - photos[p].top + 1),
-          'background': "url('" + photos[p].url + "') repeat center center"
-        }).appendTo("#canvas");
+          'background': "url('" + photos[p].imageUrl + "') repeat center center"
+        }).attr({'href': photos[p].url, 'target': '_blank'}).text(" " + p + " ").appendTo("#canvas");
         mark(canvas, photos[p].top, photos[p].right, photos[p].bottom, photos[p].left, 1);
       } else {
         break;
@@ -314,14 +315,15 @@
       for (c = 0; c < canvas[r].length; c++) {
         if (!canvas[r][c]) {
           $("<p></p>").text("Picture " + p + " placed at " + [r, c, r, c]).appendTo("#result-text");
-          $("<div></div>").css({
+          $("<a></a>").css({
             'position': 'absolute',
+            'display': 'block',
             'top': min_h * r,
             'left': min_w * c,
             'width': min_w,
             'height': min_h,
-            'background': "url('" + photos[p].url + "') repeat center center"
-          }).appendTo("#canvas");
+            'background': "url('" + photos[p].imageUrl + "') repeat center center"
+          }).attr({'href': photos[p].url, 'target': '_blank'}).text(" " + p + " ").appendTo("#canvas");
           p++;
           
           if (p === photos.length) {
@@ -445,10 +447,10 @@
       {
         'orderCol': 'score',
         'numResults': N_PHOTO,
-        'sortBy': 'DESC'
+        'sortBy': 'DESC',
+        'resultOffset': Math.floor(Math.random()*11)
       }, function (data) {
         for (var d = 0; d < data.length; d++) {
-          data[d].url = data[d].imageUrl;
           data[d].value = data.length - d;
         }
         place(data, outputPatterns);
@@ -457,7 +459,7 @@
   
   function setup() {
     $("#canvas>*").detach();
-    $("#log>*").detach();
+    $("#result-text>*").detach();
     C_ROWS = $("#rows").val();
     C_COLUMNS = $("#columns").val();
     N_PHOTO = $("#photo_no").val();
@@ -466,11 +468,13 @@
   }
   
   setup();
-  makeGrid();
+  getPatterns()
+  
+  //makeGrid();
   
   $("#gen").click(function () {
     setup();
-    makeGrid();
+    //makeGrid();
     //getFlickr();
     getPatterns()
   });
