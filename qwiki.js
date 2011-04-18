@@ -54,7 +54,7 @@
     
     var placeFunc = function (pNo, rem_Grid, value) {
 
-      var r, c, rr, cc, sub, mark, left, top, right, bottom, nrg, r1 = false, r2 = false, result = false, shrinkFunc, photoSetFunc, markPhotoFunc, selfEarn = 0;
+      var r, c, rr, cc, sub, mark, left, top, right, bottom, nrg, r1 = false, r2 = false, result = false, shrinkFunc, photoSetFunc, markPhotoFunc, selfValue, selfEarn = 0;
       if (pNo >= nPhoto) {
         return 0;
       }
@@ -90,6 +90,10 @@
         var p = photos[pNo];
         
         markCanvas(p.top, p.right, p.bottom, p.left, 1);
+      }
+      
+      selfValue = function () {
+        
       }
       
       //Find along the left edge
